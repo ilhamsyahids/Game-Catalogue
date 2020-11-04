@@ -9,7 +9,7 @@
 import Foundation
 
 struct DeveloperList: Codable {
-    let results: [DeveloperListRes]?
+    let results: [DeveloperListResult]?
     let prev: String?
     let next: String?
     let count: Int?
@@ -22,9 +22,12 @@ struct DeveloperList: Codable {
     }
 }
 
-struct DeveloperListRes: Codable {
+struct DeveloperListResult: Codable {
     let id: Int?
     let name: String?
-    let countGames: Int?
-    let image: String?
+    
+    init(_ name: String) {
+        self.name = name
+        self.id = nil
+    }
 }

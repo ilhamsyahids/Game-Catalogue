@@ -19,11 +19,11 @@ class GameView {
         return ""
     }
     
-    var isBookmark: Bool {
-        loadBookmark()
-        for bookmark in gameRealmRes {
-            if (bookmark.id == gameRes.id) {
-                if bookmark.isBookmarked {
+    var isFavorite: Bool {
+        loadFavorite()
+        for favorite in gameRealmRes {
+            if (favorite.id == gameRes.id) {
+                if favorite.isFavorite {
                     return true
                 } else {
                     return false
@@ -38,8 +38,8 @@ class GameView {
         self.gameRes = data
     }
     
-    func loadBookmark() {
-        let listGames = GameRealmResult.get(isBookmarked: true)
+    func loadFavorite() {
+        let listGames = GameRealmResult.get(isFavorite: true)
         gameRealmRes.append(contentsOf: listGames.reversed())
     }
 }

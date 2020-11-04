@@ -34,16 +34,16 @@ class GameRealmResult: Object {
     @objc dynamic var genres: String?
     @objc dynamic var released: String?
     @objc dynamic var rating: Double = 0.0
-    @objc dynamic var isBookmarked: Bool = false
+    @objc dynamic var isFavorite: Bool = false
 
     override static func primaryKey() -> String? {
         return "id"
     }
 
-    static func get(realm: Realm = try! Realm(), isBookmarked: Bool = false) -> Results<GameRealmResult> {
+    static func get(realm: Realm = try! Realm(), isFavorite: Bool = false) -> Results<GameRealmResult> {
         let newsList: Results<GameRealmResult> = realm.objects(GameRealmResult.self)
-        if isBookmarked {
-            return newsList.filter("isBookmarked == true")
+        if isFavorite {
+            return newsList.filter("isFavorite == true")
         }
         return newsList
     }
@@ -73,7 +73,7 @@ struct GameResults: Codable {
     let saturatedColor: String?
     let dominantColor: String?
     let shortScreenshots: [GameShortScreenshots]?
-    var isBookmarked: Bool?
+    var isFavorite: Bool?
 
     private enum CodingKeys: String, CodingKey {
         case slug = "slug"

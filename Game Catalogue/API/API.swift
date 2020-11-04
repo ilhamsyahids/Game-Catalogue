@@ -51,9 +51,9 @@ class API {
         task.resume()
     }
     
-    func getDeveloperList(isComplete: @escaping (Result<DeveloperList, GameError>) -> Void) {
+    func getDeveloperList(page: Int, isComplete: @escaping (Result<DeveloperList, GameError>) -> Void) {
         
-        let endpoint = baseURL + "/api/developers"
+        let endpoint = baseURL + "/api/developers?page=\(page)"
         
         guard let URL = URL(string: endpoint) else {
             isComplete(.failure(.invalidURL))
@@ -94,7 +94,7 @@ class API {
     
     func getGamesByDeveloper(id: Int, page: Int, isComplete: @escaping (Result<GameResponse, GameError>) -> Void) {
 
-        let endpoint = baseURL + "/api/games?page_size=15&platforms=3&ordering=-rating&developers=\(id)&page=\(page)"
+        let endpoint = "\(baseURL)/api/games?page_size=15&ordering=-rating&developers=\(id)&page=\(page)"
 
         guard let url = URL(string: endpoint) else {
             isComplete(.failure(.invalidURL))
